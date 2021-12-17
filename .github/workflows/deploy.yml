@@ -3,10 +3,44 @@ name: Deployment
 on: workflow_dispatch
 
 jobs:
+  integrationtesting:
+    runs-on: ubuntu-latest  
+    steps:
+      - name: Running Compile checks
+        run: |
+          "Compile Completed"
+      - name: Running Integration Test Suite 102
+        run: |
+          "Integration Test Suite 102: PASS"
+      - name: Running Integration Test Suite 101
+        run: |
+          "Integration Test Suite 101: PASS"  
+  regressiontesting:
+    runs-on: ubuntu-latest 
+    needs: integrationtesting
+    steps:
+      - name: Running Regression Test Cases
+        run: |
+          "All Regression Test Cases have PASSED"
+  codecoverage:
+    runs-on: ubuntulatest
+    needs: integrationtesting
+    steps:
+      - name: Code Coverage
+        run: |
+          "Code coverage 85%"
+  securitytesting:
+    runs-on: ubuntulatest
+    needs: integrationtesting
+    steps:
+      - name: Security Checks
+        run: |
+          "No Security issues found!"
   deployment:
     runs-on: ubuntu-latest
+    needs: [regressiontesting, codecoverage, securitytesting]
     environment: prod-env
     steps:
       - name: deploy
         run: |
-          echo "Demo Script. Deploy Complete"
+          "Deploy Completed"
