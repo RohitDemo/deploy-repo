@@ -23,14 +23,14 @@ jobs:
         run: |
           echo "All Regression Test Cases have PASSED"
   codecoverage:
-    runs-on: ubuntulatest
+    runs-on: ubuntu-latest
     needs: integrationtesting
     steps:
       - name: Code Coverage
         run: |
           echo "Code coverage 85%"
   securitytesting:
-    runs-on: ubuntulatest
+    runs-on: ubuntu-latest
     needs: integrationtesting
     steps:
       - name: Security Checks
