@@ -1,0 +1,12 @@
+name: Deployment
+
+on: workflow_dispatch
+
+jobs:
+  deployment:
+    runs-on: ubuntu-latest
+    environment: prod-env
+    steps:
+      - name: deploy
+        run: |
+          echo "Demo Script. Deploy Complete"
